@@ -5,6 +5,7 @@ namespace Assembler
         private bool isPickingPoint = false;
         private Control selectedObject;
         private string currentView = "InitialView";
+        private Dictionary<string, List<ControlDto>> views = new Dictionary<string, List<ControlDto>>();
         public Form1()
         {
             InitializeComponent();
@@ -146,6 +147,112 @@ namespace Assembler
             AddToTreeview(newTextBox);
             DesignerSplit.Panel1.Controls.Add(newTextBox);
         }
+        private List<ControlDto> CaptureCurrentView()
+        {
+            var list = new List<ControlDto>();
+            foreach (Control ctrl in DesignerSplit.Panel1.Controls)
+            {
+                list.Add(new ControlDto
+                {
+                    TypeName = ctrl.GetType().FullName,
+                    Name = ctrl.Name,
+                    Text = ctrl.Text,
+                    X = ctrl.Location.X,
+                    Y = ctrl.Location.Y,
+                    Width = ctrl.Width,
+                    Height = ctrl.Height,
+                    AutoSize = ctrl.AutoSize,
+                    BackColorArgb = ctrl.BackColor.ToArgb(),
+                    ForeColorArgb = ctrl.ForeColor.ToArgb()
+                });
+            }
+            return list;
+        }
+        public void SwitchView(string targetViewName, bool attachDesignerEvents = true)
+        {
+            // Save what is currently on the canvas before switching away
+            if (!string.IsNullOrEmpty(currentView))
+            {
+                views[currentView] = CaptureCurrentView();
+            }
 
+            currentView = targetViewName;
+
+            // Clear and dispose current canvas controls
+            DesignerSplit.Panel1.SuspendLayout();
+            for (int i = DesignerSplit.Panel1.Controls.Count - 1; i >= 0; i--)
+            {
+                Control oldCtrl = DesignerSplit.Panel1.Controls[i];
+                DesignerSplit.Panel1.Controls.RemoveAt(i);
+                oldCtrl.Dispose();
+            }
+            selectedObject = null;
+            propertyGrid1.SelectedObject = null;
+
+            // If the target view already exists, reconstruct its controls
+            if (views.TryGetValue(targetViewName, out var dtoList))
+            {
+                foreach (var dto in dtoList)
+                {
+                    Type ctrlType = typeof(Control).Assembly.GetType(dto.TypeName);
+                    if (ctrlType != null && Activator.CreateInstance(ctrlType) is Control ctrl)
+                    {
+                        ctrl.Name = dto.Name;
+                        ctrl.Text = dto.Text;
+                        ctrl.AutoSize = dto.AutoSize;
+                        ctrl.Location = new Point(dto.X, dto.Y);
+                        ctrl.Size = new Size(dto.Width, dto.Height);
+                        ctrl.BackColor = Color.FromArgb(dto.BackColorArgb);
+                        ctrl.ForeColor = Color.FromArgb(dto.ForeColorArgb);
+
+                        // Only attach designer click selection if in Design Mode
+                        if (attachDesignerEvents)
+                        {
+                            ctrl.Click += (s, e) => selectControlForProps(s);
+                        }
+
+                        DesignerSplit.Panel1.Controls.Add(ctrl);
+                    }
+                }
+            }
+
+            DesignerSplit.Panel1.ResumeLayout();
+        }
+
+        private void PreviewCurrentView()
+        {
+            // Capture current controls into DTOs
+            List<ControlDto> currentControls = CaptureCurrentView();
+
+            // Create a clean popup Form to host the preview
+            Form previewForm = new Form
+            {
+                Text = $"{currentView} - Preview",
+                Size = DesignerSplit.Panel1.Size,
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            // Instantiate the controls WITHOUT attaching selectControlForProps
+            foreach (var dto in currentControls)
+            {
+                Type ctrlType = typeof(Control).Assembly.GetType(dto.TypeName);
+                if (ctrlType != null && Activator.CreateInstance(ctrlType) is Control ctrl)
+                {
+                    ctrl.Name = dto.Name;
+                    ctrl.Text = dto.Text;
+                    ctrl.AutoSize = dto.AutoSize;
+                    ctrl.Location = new Point(dto.X, dto.Y);
+                    ctrl.Size = new Size(dto.Width, dto.Height);
+                    //ctrl.BackColor = Color.FromArgb(dto.BackColorArgb);
+                    //ctrl.ForeColor = Color.FromArgb(dto.ForeColorArgb);
+                    previewForm.Controls.Add(ctrl);
+                }
+            }
+
+            previewForm.ShowDialog(this);
+            previewForm.Dispose();
+        }
+
+        private void tsPreviewCurrView_Click(object sender, EventArgs e) => PreviewCurrentView();
     }
 }

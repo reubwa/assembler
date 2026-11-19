@@ -54,6 +54,7 @@
             imageList1 = new ImageList(components);
             DesignerSplit = new SplitContainer();
             propertyGrid1 = new PropertyGrid();
+            tsPreviewCurrView = new ToolStripButton();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ViewsDesignerSplit).BeginInit();
@@ -92,7 +93,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(32, 32);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, tsAddControlDD, tsRemoveSelectedControl, tsMoveToggle, toolStripSeparator2, toolStripButton5, toolStripButton4 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, tsAddControlDD, tsRemoveSelectedControl, tsMoveToggle, toolStripSeparator2, toolStripButton5, toolStripButton4, tsPreviewCurrView });
             toolStrip1.Location = new Point(0, 38);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -147,7 +148,7 @@
             // 
             buttonToolStripMenuItem.Image = Properties.Resources.Unselected_Button;
             buttonToolStripMenuItem.Name = "buttonToolStripMenuItem";
-            buttonToolStripMenuItem.Size = new Size(319, 44);
+            buttonToolStripMenuItem.Size = new Size(202, 40);
             buttonToolStripMenuItem.Text = "&Button";
             buttonToolStripMenuItem.Click += buttonToolStripMenuItem_Click;
             // 
@@ -155,7 +156,7 @@
             // 
             labelToolStripMenuItem.Image = Properties.Resources.Unselected_Label;
             labelToolStripMenuItem.Name = "labelToolStripMenuItem";
-            labelToolStripMenuItem.Size = new Size(319, 44);
+            labelToolStripMenuItem.Size = new Size(202, 40);
             labelToolStripMenuItem.Text = "&Label";
             labelToolStripMenuItem.Click += labelToolStripMenuItem_Click;
             // 
@@ -163,7 +164,7 @@
             // 
             textboxToolStripMenuItem.Image = Properties.Resources.Unselected_Textbox;
             textboxToolStripMenuItem.Name = "textboxToolStripMenuItem";
-            textboxToolStripMenuItem.Size = new Size(319, 44);
+            textboxToolStripMenuItem.Size = new Size(202, 40);
             textboxToolStripMenuItem.Text = "&Textbox";
             textboxToolStripMenuItem.Click += textboxToolStripMenuItem_Click;
             // 
@@ -292,6 +293,17 @@
             propertyGrid1.Size = new Size(337, 981);
             propertyGrid1.TabIndex = 0;
             // 
+            // tsPreviewCurrView
+            // 
+            tsPreviewCurrView.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsPreviewCurrView.Image = (Image)resources.GetObject("tsPreviewCurrView.Image");
+            tsPreviewCurrView.ImageTransparentColor = Color.Magenta;
+            tsPreviewCurrView.Name = "tsPreviewCurrView";
+            tsPreviewCurrView.Size = new Size(40, 36);
+            tsPreviewCurrView.Text = "toolStripButton6";
+            tsPreviewCurrView.ToolTipText = "Preview Current View";
+            tsPreviewCurrView.Click += tsPreviewCurrView_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
@@ -342,5 +354,6 @@
         private ToolStripMenuItem labelToolStripMenuItem;
         private ToolStripMenuItem textboxToolStripMenuItem;
         private ImageList imageList1;
+        private ToolStripButton tsPreviewCurrView;
     }
 }
