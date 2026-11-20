@@ -63,9 +63,59 @@ namespace Assembler.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Form_Folder {
+        internal static System.Drawing.Bitmap Add_Control {
             get {
-                object obj = ResourceManager.GetObject("Form_Folder", resourceCulture);
+                object obj = ResourceManager.GetObject("Add_Control", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Add_View {
+            get {
+                object obj = ResourceManager.GetObject("Add_View", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Delete_Control {
+            get {
+                object obj = ResourceManager.GetObject("Delete_Control", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Delete_View {
+            get {
+                object obj = ResourceManager.GetObject("Delete_View", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Move_Control {
+            get {
+                object obj = ResourceManager.GetObject("Move_Control", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Preview {
+            get {
+                object obj = ResourceManager.GetObject("Preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +196,16 @@ namespace Assembler.Properties {
         internal static System.Drawing.Bitmap Unselected_Textbox {
             get {
                 object obj = ResourceManager.GetObject("Unselected_Textbox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View_Folder {
+            get {
+                object obj = ResourceManager.GetObject("View_Folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

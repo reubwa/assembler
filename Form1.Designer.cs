@@ -32,9 +32,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             TreeNode treeNode1 = new TreeNode("InitialView", 0, 1);
             TreeNode treeNode2 = new TreeNode("Views", 2, 2, new TreeNode[] { treeNode1 });
+            ctxTVView = new ContextMenuStrip(components);
+            removeToolStripMenuItem = new ToolStripMenuItem();
+            renameToolStripMenuItem = new ToolStripMenuItem();
+            ctxTVRootView = new ContextMenuStrip(components);
+            addViewToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             newToolStripMenuItem = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            undoToolStripMenuItem = new ToolStripMenuItem();
+            redoToolStripMenuItem = new ToolStripMenuItem();
+            insertToolStripMenuItem = new ToolStripMenuItem();
+            viewsToolStripMenuItem = new ToolStripMenuItem();
+            addViewToolStripMenuItem1 = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            removeThisVoewToolStripMenuItem = new ToolStripMenuItem();
+            renameThisViewToolStripMenuItem = new ToolStripMenuItem();
+            previewThisViewToolStripMenuItem = new ToolStripMenuItem();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
@@ -48,13 +63,17 @@
             tsMoveToggle = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripButton5 = new ToolStripButton();
-            toolStripButton4 = new ToolStripButton();
+            tsRemoveView = new ToolStripButton();
+            tsPreviewCurrView = new ToolStripButton();
             ViewsDesignerSplit = new SplitContainer();
             treeView1 = new TreeView();
             imageList1 = new ImageList(components);
             DesignerSplit = new SplitContainer();
             propertyGrid1 = new PropertyGrid();
-            tsPreviewCurrView = new ToolStripButton();
+            ctxDesignerControl = new ContextMenuStrip(components);
+            removeToolStripMenuItem1 = new ToolStripMenuItem();
+            ctxTVView.SuspendLayout();
+            ctxTVRootView.SuspendLayout();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ViewsDesignerSplit).BeginInit();
@@ -64,12 +83,50 @@
             ((System.ComponentModel.ISupportInitialize)DesignerSplit).BeginInit();
             DesignerSplit.Panel2.SuspendLayout();
             DesignerSplit.SuspendLayout();
+            ctxDesignerControl.SuspendLayout();
             SuspendLayout();
+            // 
+            // ctxTVView
+            // 
+            ctxTVView.ImageScalingSize = new Size(28, 28);
+            ctxTVView.Items.AddRange(new ToolStripItem[] { removeToolStripMenuItem, renameToolStripMenuItem });
+            ctxTVView.Name = "ctxTVView";
+            ctxTVView.Size = new Size(174, 76);
+            // 
+            // removeToolStripMenuItem
+            // 
+            removeToolStripMenuItem.Image = Properties.Resources.Delete_View;
+            removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            removeToolStripMenuItem.Size = new Size(173, 36);
+            removeToolStripMenuItem.Text = "&Remove";
+            removeToolStripMenuItem.Click += removeToolStripMenuItem_Click;
+            // 
+            // renameToolStripMenuItem
+            // 
+            renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            renameToolStripMenuItem.Size = new Size(173, 36);
+            renameToolStripMenuItem.Text = "R&ename";
+            renameToolStripMenuItem.Click += renameToolStripMenuItem_Click;
+            // 
+            // ctxTVRootView
+            // 
+            ctxTVRootView.ImageScalingSize = new Size(28, 28);
+            ctxTVRootView.Items.AddRange(new ToolStripItem[] { addViewToolStripMenuItem });
+            ctxTVRootView.Name = "ctxTVRootView";
+            ctxTVRootView.Size = new Size(187, 40);
+            // 
+            // addViewToolStripMenuItem
+            // 
+            addViewToolStripMenuItem.Image = Properties.Resources.Add_View;
+            addViewToolStripMenuItem.Name = "addViewToolStripMenuItem";
+            addViewToolStripMenuItem.Size = new Size(186, 36);
+            addViewToolStripMenuItem.Text = "&Add View";
+            addViewToolStripMenuItem.Click += addViewToolStripMenuItem_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(32, 32);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, insertToolStripMenuItem, viewsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -90,10 +147,80 @@
             newToolStripMenuItem.Size = new Size(173, 40);
             newToolStripMenuItem.Text = "&New";
             // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(66, 34);
+            editToolStripMenuItem.Text = "&Edit";
+            // 
+            // undoToolStripMenuItem
+            // 
+            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            undoToolStripMenuItem.Size = new Size(181, 40);
+            undoToolStripMenuItem.Text = "&Undo";
+            // 
+            // redoToolStripMenuItem
+            // 
+            redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            redoToolStripMenuItem.Size = new Size(181, 40);
+            redoToolStripMenuItem.Text = "&Redo";
+            // 
+            // insertToolStripMenuItem
+            // 
+            insertToolStripMenuItem.Name = "insertToolStripMenuItem";
+            insertToolStripMenuItem.Size = new Size(83, 34);
+            insertToolStripMenuItem.Text = "&Insert";
+            // 
+            // viewsToolStripMenuItem
+            // 
+            viewsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addViewToolStripMenuItem1, toolStripSeparator3, removeThisVoewToolStripMenuItem, renameThisViewToolStripMenuItem, previewThisViewToolStripMenuItem });
+            viewsToolStripMenuItem.Name = "viewsToolStripMenuItem";
+            viewsToolStripMenuItem.Size = new Size(84, 34);
+            viewsToolStripMenuItem.Text = "&Views";
+            // 
+            // addViewToolStripMenuItem1
+            // 
+            addViewToolStripMenuItem1.Image = Properties.Resources.Add_View;
+            addViewToolStripMenuItem1.Name = "addViewToolStripMenuItem1";
+            addViewToolStripMenuItem1.ShortcutKeys = Keys.Control | Keys.A;
+            addViewToolStripMenuItem1.Size = new Size(394, 40);
+            addViewToolStripMenuItem1.Text = "&Add View";
+            addViewToolStripMenuItem1.Click += addViewToolStripMenuItem1_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(391, 6);
+            // 
+            // removeThisVoewToolStripMenuItem
+            // 
+            removeThisVoewToolStripMenuItem.Name = "removeThisVoewToolStripMenuItem";
+            removeThisVoewToolStripMenuItem.ShortcutKeys = Keys.Shift | Keys.Delete;
+            removeThisVoewToolStripMenuItem.Size = new Size(394, 40);
+            removeThisVoewToolStripMenuItem.Text = "&Remove this View";
+            removeThisVoewToolStripMenuItem.Click += removeThisVoewToolStripMenuItem_Click;
+            // 
+            // renameThisViewToolStripMenuItem
+            // 
+            renameThisViewToolStripMenuItem.Name = "renameThisViewToolStripMenuItem";
+            renameThisViewToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.R;
+            renameThisViewToolStripMenuItem.Size = new Size(394, 40);
+            renameThisViewToolStripMenuItem.Text = "R&ename this View";
+            renameThisViewToolStripMenuItem.Click += renameThisViewToolStripMenuItem_Click;
+            // 
+            // previewThisViewToolStripMenuItem
+            // 
+            previewThisViewToolStripMenuItem.Image = Properties.Resources.Preview;
+            previewThisViewToolStripMenuItem.Name = "previewThisViewToolStripMenuItem";
+            previewThisViewToolStripMenuItem.ShortcutKeys = Keys.Shift | Keys.F5;
+            previewThisViewToolStripMenuItem.Size = new Size(394, 40);
+            previewThisViewToolStripMenuItem.Text = "&Preview this View";
+            // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(32, 32);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, tsAddControlDD, tsRemoveSelectedControl, tsMoveToggle, toolStripSeparator2, toolStripButton5, toolStripButton4, tsPreviewCurrView });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, tsAddControlDD, tsRemoveSelectedControl, tsMoveToggle, toolStripSeparator2, toolStripButton5, tsRemoveView, tsPreviewCurrView });
             toolStrip1.Location = new Point(0, 38);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -137,7 +264,7 @@
             // 
             tsAddControlDD.DisplayStyle = ToolStripItemDisplayStyle.Image;
             tsAddControlDD.DropDownItems.AddRange(new ToolStripItem[] { buttonToolStripMenuItem, labelToolStripMenuItem, textboxToolStripMenuItem });
-            tsAddControlDD.Image = (Image)resources.GetObject("tsAddControlDD.Image");
+            tsAddControlDD.Image = Properties.Resources.Add_Control;
             tsAddControlDD.ImageTransparentColor = Color.Magenta;
             tsAddControlDD.Name = "tsAddControlDD";
             tsAddControlDD.Size = new Size(53, 36);
@@ -171,7 +298,8 @@
             // tsRemoveSelectedControl
             // 
             tsRemoveSelectedControl.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsRemoveSelectedControl.Image = (Image)resources.GetObject("tsRemoveSelectedControl.Image");
+            tsRemoveSelectedControl.Enabled = false;
+            tsRemoveSelectedControl.Image = Properties.Resources.Delete_Control;
             tsRemoveSelectedControl.ImageTransparentColor = Color.Magenta;
             tsRemoveSelectedControl.Name = "tsRemoveSelectedControl";
             tsRemoveSelectedControl.Size = new Size(40, 36);
@@ -183,7 +311,7 @@
             // 
             tsMoveToggle.CheckOnClick = true;
             tsMoveToggle.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsMoveToggle.Image = (Image)resources.GetObject("tsMoveToggle.Image");
+            tsMoveToggle.Image = Properties.Resources.Move_Control;
             tsMoveToggle.ImageTransparentColor = Color.Magenta;
             tsMoveToggle.Name = "tsMoveToggle";
             tsMoveToggle.Size = new Size(40, 36);
@@ -198,20 +326,36 @@
             // toolStripButton5
             // 
             toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
+            toolStripButton5.Image = Properties.Resources.Add_View;
             toolStripButton5.ImageTransparentColor = Color.Magenta;
             toolStripButton5.Name = "toolStripButton5";
             toolStripButton5.Size = new Size(40, 36);
             toolStripButton5.Text = "toolStripButton5";
+            toolStripButton5.ToolTipText = "Add View";
+            toolStripButton5.Click += toolStripButton5_Click;
             // 
-            // toolStripButton4
+            // tsRemoveView
             // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(40, 36);
-            toolStripButton4.Text = "toolStripButton4";
+            tsRemoveView.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsRemoveView.Enabled = false;
+            tsRemoveView.Image = Properties.Resources.Delete_View;
+            tsRemoveView.ImageTransparentColor = Color.Magenta;
+            tsRemoveView.Name = "tsRemoveView";
+            tsRemoveView.Size = new Size(40, 36);
+            tsRemoveView.Text = "toolStripButton4";
+            tsRemoveView.ToolTipText = "Remove Selected View";
+            tsRemoveView.Click += tsRemoveView_Click;
+            // 
+            // tsPreviewCurrView
+            // 
+            tsPreviewCurrView.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsPreviewCurrView.Image = Properties.Resources.Preview;
+            tsPreviewCurrView.ImageTransparentColor = Color.Magenta;
+            tsPreviewCurrView.Name = "tsPreviewCurrView";
+            tsPreviewCurrView.Size = new Size(40, 36);
+            tsPreviewCurrView.Text = "toolStripButton6";
+            tsPreviewCurrView.ToolTipText = "Preview Current View";
+            tsPreviewCurrView.Click += tsPreviewCurrView_Click;
             // 
             // ViewsDesignerSplit
             // 
@@ -238,10 +382,12 @@
             treeView1.Location = new Point(0, 0);
             treeView1.Name = "treeView1";
             treeNode1.Checked = true;
+            treeNode1.ContextMenuStrip = ctxTVView;
             treeNode1.ImageIndex = 0;
             treeNode1.Name = "InitialView";
             treeNode1.SelectedImageIndex = 1;
             treeNode1.Text = "InitialView";
+            treeNode2.ContextMenuStrip = ctxTVRootView;
             treeNode2.ImageIndex = 2;
             treeNode2.Name = "RootViews";
             treeNode2.SelectedImageIndex = 2;
@@ -293,16 +439,21 @@
             propertyGrid1.Size = new Size(337, 981);
             propertyGrid1.TabIndex = 0;
             // 
-            // tsPreviewCurrView
+            // ctxDesignerControl
             // 
-            tsPreviewCurrView.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsPreviewCurrView.Image = (Image)resources.GetObject("tsPreviewCurrView.Image");
-            tsPreviewCurrView.ImageTransparentColor = Color.Magenta;
-            tsPreviewCurrView.Name = "tsPreviewCurrView";
-            tsPreviewCurrView.Size = new Size(40, 36);
-            tsPreviewCurrView.Text = "toolStripButton6";
-            tsPreviewCurrView.ToolTipText = "Preview Current View";
-            tsPreviewCurrView.Click += tsPreviewCurrView_Click;
+            ctxDesignerControl.ImageScalingSize = new Size(28, 28);
+            ctxDesignerControl.Items.AddRange(new ToolStripItem[] { removeToolStripMenuItem1 });
+            ctxDesignerControl.Name = "ctxDesignerControl";
+            ctxDesignerControl.Size = new Size(283, 78);
+            // 
+            // removeToolStripMenuItem1
+            // 
+            removeToolStripMenuItem1.Image = Properties.Resources.Delete_Control;
+            removeToolStripMenuItem1.Name = "removeToolStripMenuItem1";
+            removeToolStripMenuItem1.ShortcutKeys = Keys.Delete;
+            removeToolStripMenuItem1.Size = new Size(282, 36);
+            removeToolStripMenuItem1.Text = "&Remove";
+            removeToolStripMenuItem1.Click += removeToolStripMenuItem1_Click;
             // 
             // Form1
             // 
@@ -315,6 +466,8 @@
             Name = "Form1";
             Text = "Assembler";
             Load += Form1_Load;
+            ctxTVView.ResumeLayout(false);
+            ctxTVRootView.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -326,6 +479,7 @@
             DesignerSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DesignerSplit).EndInit();
             DesignerSplit.ResumeLayout(false);
+            ctxDesignerControl.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -348,12 +502,29 @@
         private ToolStripButton tsMoveToggle;
         private ToolStripMenuItem buttonToolStripMenuItem;
         private ToolStripButton toolStripButton5;
-        private ToolStripButton toolStripButton4;
+        private ToolStripButton tsRemoveView;
         private ToolStripButton tsRemoveSelectedControl;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem labelToolStripMenuItem;
         private ToolStripMenuItem textboxToolStripMenuItem;
         private ImageList imageList1;
         private ToolStripButton tsPreviewCurrView;
+        private ContextMenuStrip ctxTVView;
+        private ToolStripMenuItem removeToolStripMenuItem;
+        private ContextMenuStrip ctxTVRootView;
+        private ToolStripMenuItem addViewToolStripMenuItem;
+        private ToolStripMenuItem renameToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem undoToolStripMenuItem;
+        private ToolStripMenuItem redoToolStripMenuItem;
+        private ToolStripMenuItem insertToolStripMenuItem;
+        private ToolStripMenuItem viewsToolStripMenuItem;
+        private ToolStripMenuItem addViewToolStripMenuItem1;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem removeThisVoewToolStripMenuItem;
+        private ToolStripMenuItem renameThisViewToolStripMenuItem;
+        private ToolStripMenuItem previewThisViewToolStripMenuItem;
+        private ContextMenuStrip ctxDesignerControl;
+        private ToolStripMenuItem removeToolStripMenuItem1;
     }
 }
